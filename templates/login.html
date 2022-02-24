@@ -1,0 +1,81 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<style>
+table {
+    padding: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    border-collapse: separate;
+    border-spacing: 0 30px;
+}
+tr {
+    border-bottom: 1px solid silver;
+}
+.tdleft {
+    width:50%
+}
+.tdright {
+    width: 50%;
+    text-align: left;
+}
+button {
+    height: 25px; 
+    width: 60px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+}
+</style>
+
+<h1>Project Management System</h1>
+
+<div class="global-container">
+	<div class="card login-form">
+	<div class="card-body">
+    
+		<h3 class="card-title text-center">Log in</h3>
+        {% if messages %}
+            {% for message in messages %}
+
+                <div class="alert alert-info">
+                {{ message }}
+                </div>
+
+            {% endfor %}
+        {% endif %}
+		<div class="card-text">
+			<!--
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
+			<form method="post" action="/">
+                {% csrf_token%}
+				<!-- to error: add class "has-danger" -->
+				<div class="form-group">
+					<label for="exampleInputEmail1">Username</label>
+					<input type="text" name="username" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Password</label>
+					<input type="password" name="password" class="form-control form-control-sm" id="exampleInputPassword1">
+				</div><br>
+                <div class="form-group">
+					<label for="exampleInputEmail1">Login as</label><br>
+					<label for="exampleInputEmail1">Leader</label>
+					<input type="radio" name="account" value="leader" required>
+					<label for="exampleInputEmail1">Member</label>
+					<input type="radio" name="account" value="member" required>
+				</div>
+				<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+				
+				<div class="sign-up">
+					Don't have an account? <a href="{% url 'register' %}">Create One</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+
+{% endblock %}
